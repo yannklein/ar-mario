@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import THREEx from 'ar';
 
 import createTorusKnot from './three/three-torusKnot';
+import createGamePlane from './three/three-gamePlane';
 
 THREEx.ArToolkitContext.baseURL = 'assets/';
 
@@ -122,7 +123,7 @@ const initAr = () => {
   //////////////////////////////////////////////////////////////////////////////////
 
   // add a torus knot
-  createTorusKnot(scene);
+  createGamePlane(scene);
 
   //////////////////////////////////////////////////////////////////////////////////
   //    render the whole thing on the page
