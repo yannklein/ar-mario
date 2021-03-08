@@ -1,0 +1,19 @@
+.btn-control {
+  z-index: 999;
+  position: fixed;
+  font-size: 64px;
+  bottom: 24px;
+  cursor: pointer;
+}
+
+.btn-left {
+  left: 24px;
+}
+
+.btn-right {
+  left: 112px;
+}
+
+.btn-jump {
+  right: 24px;
+}

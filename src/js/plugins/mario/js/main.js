@@ -127,10 +127,10 @@ async function initMario(videoContext) {
     startWorld('debug-pipe');
 }
 
-const startMario = (canvas) => {
-  window.addEventListener('click', () => {
-    initMario(canvas);
-  });
-}
+// const startMario = (canvas) => {
+//   window.addEventListener('click', () => {
+//     initMario(canvas);
+//   });
+// }
 
-export { startMario };
+export { initMario };

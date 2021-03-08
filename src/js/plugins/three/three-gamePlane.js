@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { startMario } from '../mario/js/main';
+import { initMario } from '../mario/js/main';
 
 const createGamePlane = scene => {
 
@@ -11,7 +11,7 @@ const createGamePlane = scene => {
   window.ctx = ctx;
   // ctx.fillStyle = '#F00';
   // ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-  startMario(window.ctx);
+  initMario(window.ctx);
   const texture = new THREE.CanvasTexture(window.ctx.canvas);
 
   var geometry  = new THREE.PlaneGeometry(1,1);
