@@ -17,7 +17,8 @@ import TimedScene from './TimedScene.js';
 import { connectEntity } from './traits/Pipe.js';
 
 async function initMario(videoContext) {
-    const audioContext = new AudioContext();
+    var AudioContext = window.AudioContext || window.webkitAudioContext;
+    var audioContext = new AudioContext();
 
     const [entityFactory, font] = await Promise.all([
         loadEntities(audioContext),
