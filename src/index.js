@@ -1,5 +1,8 @@
 import './styles/index.scss';
 
+import "core-js/stable";
+import "regenerator-runtime/runtime";
+
 import initThree from './three/three-init';
 
 console.log(

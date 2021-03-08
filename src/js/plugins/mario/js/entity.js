@@ -1,34 +1,96 @@
-(function() {
-	if (typeof Mario === 'undefined')
-		window.Mario = {};
+import {Vec2} from './math.js';
+import AudioBoard from './AudioBoard.js';
+import BoundingBox from './BoundingBox.js';
+import EventBuffer from './EventBuffer.js';
+import Trait from './Trait.js';
 
-	var Entity = Mario.Entity = function(options) {
-	  this.vel = [0,0];
-	  this.acc = [0,0];
-		this.standing = true;
-	  this.pos = options.pos;
-	  this.sprite = options.sprite;
-	  this.hitbox = options.hitbox;
-	  this.left = false;
-	}
+export const Align = {
+    center(target, subject) {
+        subject.bounds.setCenter(target.bounds.getCenter());
+    },
 
-	Entity.prototype.render = function(ctx, vX, vY) {
-		this.sprite.render(ctx, this.pos[0], this.pos[1], vX, vY)
-	}
+    bottom(target, subject) {
+        subject.bounds.bottom = target.bounds.bottom;
+    },
 
-	Entity.prototype.collideWall = function(wall) {
-		//the wall will always be a 16x16 block with hitbox = [0,0,16,16].
-		if (this.pos[0] > wall.pos[0]) {
-			//from the right
-			this.pos[0] = wall.pos[0] + wall.hitbox[2] - this.hitbox[0];
-			this.vel[0] = Math.max(0, this.vel[0]);
-			this.acc[0] = Math.max(0, this.acc[0]);
-		} else {
-			this.pos[0] = wall.pos[0] + wall.hitbox[0] - this.hitbox[2] - this.hitbox[0];
-			this.vel[0] = Math.min(0, this.vel[0]);
-			this.acc[0] = Math.min(0, this.acc[0]);
-		}
-	}
+    top(target, subject) {
+        subject.bounds.top = target.bounds.top;
+    },
 
-	Entity.prototype.bump = function() {;}
-})();
+    left(target, subject) {
+        subject.bounds.left = target.bounds.left;
+    },
+
+    right(target, subject) {
+        subject.bounds.right = target.bounds.right;
+    },
+};
+
+export const Sides = {
+    TOP: Symbol('top'),
+    BOTTOM: Symbol('bottom'),
+    LEFT: Symbol('left'),
+    RIGHT: Symbol('right'),
+};
+
+export default class Entity {
+    constructor() {
+        this.id = null;
+        this.audio = new AudioBoard();
+        this.events = new EventBuffer();
+        this.sounds = new Set();
+
+        this.pos = new Vec2(0, 0);
+        this.vel = new Vec2(0, 0);
+        this.size = new Vec2(0, 0);
+        this.offset = new Vec2(0, 0);
+        this.bounds = new BoundingBox(this.pos, this.size, this.offset);
+        this.lifetime = 0;
+
+        this.traits = new Map();
+    }
+
+    addTrait(trait) {
+        this.traits.set(trait.constructor, trait);
+    }
+
+    collides(candidate) {
+        this.traits.forEach(trait => {
+            trait.collides(this, candidate);
+        });
+    }
+
+    obstruct(side, match) {
+        this.traits.forEach(trait => {
+            trait.obstruct(this, side, match);
+        });
+    }
+
+    finalize() {
+        this.events.emit(Trait.EVENT_TASK, this);
+
+        this.traits.forEach(trait => {
+            trait.finalize(this);
+        });
+
+        this.events.clear();
+    }
+
+    playSounds(audioBoard, audioContext) {
+        this.sounds.forEach(name => {
+            audioBoard.playAudio(name, audioContext);
+        });
+
+        this.sounds.clear();
+    }
+
+    update(gameContext, level) {
+        this.traits.forEach(trait => {
+            trait.update(this, gameContext, level);
+        });
+
+        this.playSounds(this.audio, gameContext.audioContext);
+
+        this.lifetime += gameContext.deltaTime;
+    }
+}
