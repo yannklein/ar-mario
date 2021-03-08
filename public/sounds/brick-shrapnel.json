@@ -1,7 +1,7 @@
 {
     "fx": {
         "break": {
-            "url": "/assets/audio/fx/brick-destroy.ogg"
+            "url": "assets/audio/fx/brick-destroy.ogg"
         }
     }
 }

@@ -1,7 +1,7 @@
 {
     "fx": {
         "ride": {
-            "url": "/assets/audio/fx/flagpole.ogg"
+            "url": "assets/audio/fx/flagpole.ogg"
         }
     }
 }
