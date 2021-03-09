@@ -22,28 +22,32 @@ export function setupKeyboard(window) {
     document.querySelector("#btn-jump").addEventListener('click', event => {
       router.route(entity => entity.traits.get(Jump).start());
     });
-    document.querySelector("#btn-left").addEventListener('mousedown', event => {
-      router.route(entity => {
-        entity.traits.get(Go).dir += -1;
-        entity.traits.get(PipeTraveller).direction.x += -1;
+    ["touchstart", 'mousedown'].foreEach((eventType) => {
+      document.querySelector("#btn-left").addEventListener(eventType, event => {
+        router.route(entity => {
+          entity.traits.get(Go).dir += -1;
+          entity.traits.get(PipeTraveller).direction.x += -1;
+        });
+      });
+      document.querySelector("#btn-right").addEventListener(eventType, event => {
+        router.route(entity => {
+          entity.traits.get(Go).dir += 1;
+          entity.traits.get(PipeTraveller).direction.x += 1;
+        });
       });
     });
-    document.querySelector("#btn-left").addEventListener('mouseup', event => {
-      router.route(entity => {
-        entity.traits.get(Go).dir += 1;
-        entity.traits.get(PipeTraveller).direction.x += 1;
+    ["touchend", 'mouseup'].foreEach((eventType) => {
+      document.querySelector("#btn-left").addEventListener(eventType, event => {
+        router.route(entity => {
+          entity.traits.get(Go).dir += 1;
+          entity.traits.get(PipeTraveller).direction.x += 1;
+        });
       });
-    });
-    document.querySelector("#btn-right").addEventListener('mousedown', event => {
-      router.route(entity => {
-        entity.traits.get(Go).dir += 1;
-        entity.traits.get(PipeTraveller).direction.x += 1;
-      });
-    });
-    document.querySelector("#btn-right").addEventListener('mouseup', event => {
-      router.route(entity => {
-        entity.traits.get(Go).dir += -1;
-        entity.traits.get(PipeTraveller).direction.x += -1;
+      document.querySelector("#btn-right").addEventListener(eventType, event => {
+        router.route(entity => {
+          entity.traits.get(Go).dir += -1;
+          entity.traits.get(PipeTraveller).direction.x += -1;
+        });
       });
     });
 
