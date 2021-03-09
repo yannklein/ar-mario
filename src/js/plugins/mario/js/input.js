@@ -22,7 +22,7 @@ export function setupKeyboard(window) {
     document.querySelector("#btn-jump").addEventListener('click', event => {
       router.route(entity => entity.traits.get(Jump).start());
     });
-    ["touchstart", 'mousedown'].foreEach((eventType) => {
+    ["touchstart", 'mousedown'].forEach((eventType) => {
       document.querySelector("#btn-left").addEventListener(eventType, event => {
         router.route(entity => {
           entity.traits.get(Go).dir += -1;
@@ -36,7 +36,7 @@ export function setupKeyboard(window) {
         });
       });
     });
-    ["touchend", 'mouseup'].foreEach((eventType) => {
+    ["touchend", 'mouseup'].forEach((eventType) => {
       document.querySelector("#btn-left").addEventListener(eventType, event => {
         router.route(entity => {
           entity.traits.get(Go).dir += 1;
