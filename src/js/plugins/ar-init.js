@@ -46,11 +46,11 @@ const initAr = () => {
 
   var arToolkitSource = new THREEx.ArToolkitSource({
     // to read from the webcam
-    // sourceType : 'webcam',
+    sourceType : 'webcam',
 
     // // to read from an image
-    sourceType : 'image',
-    sourceUrl : THREEx.ArToolkitContext.baseURL + './hiro_sample.png',
+    // sourceType : 'image',
+    // sourceUrl : THREEx.ArToolkitContext.baseURL + './hiro_sample.png',
 
     // to read from a video
     // sourceType : 'video',
