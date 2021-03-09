@@ -29,7 +29,7 @@ export function createAudioLoader(context) {
             .then(arrayBuffer => {
                 console.log({arrayBuffer}, context)
                 return context.decodeAudioData(arrayBuffer, (buffer) => {
-                                resolve(buffer);
+                                console.log(buffer);
                        }, (e) => { console.log(e); });
             });
     }
