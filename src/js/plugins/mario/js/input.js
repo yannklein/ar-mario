@@ -19,7 +19,7 @@ export function setupKeyboard(window) {
 
     input.listenTo(window);
 
-    document.querySelector("#btn-jump").addEventListener('click', event => {
+    document.querySelector("#btn-jump").addEventListener('touchstart', event => {
       router.route(entity => entity.traits.get(Jump).start());
     });
     ["touchstart", 'mousedown'].forEach((eventType) => {
