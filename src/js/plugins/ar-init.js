@@ -6,7 +6,7 @@ import createGamePlane from './three/three-gamePlane';
 
 THREEx.ArToolkitContext.baseURL = 'assets/';
 
-const initAr = () => {
+const initAr = (mode = 'production') => {
   //////////////////////////////////////////////////////////////////////////////////
   //    Init
   //////////////////////////////////////////////////////////////////////////////////
@@ -44,18 +44,30 @@ const initAr = () => {
   //          handle arToolkitSource
   ////////////////////////////////////////////////////////////////////////////////
 
-  var arToolkitSource = new THREEx.ArToolkitSource({
-    // to read from the webcam
-    // sourceType : 'webcam',
+  // prepare source type depending simulation/production mode
+  const sourceType = {};
+  if (mode === 'simulation') {
+    sourceType.sourceType = 'image';
+    sourceType.sourceUrl = THREEx.ArToolkitContext.baseURL + './hiro_sample.png';
+  } else {
+    sourceType.sourceType = 'webcam';
+  }
 
-    // // to read from an image
-    sourceType : 'image',
-    sourceUrl : THREEx.ArToolkitContext.baseURL + './hiro_sample.png',
+  var arToolkitSource = new THREEx.ArToolkitSource(
+    sourceType
+    // {
+      // to read from the webcam
+      // sourceType : 'webcam',
 
-    // to read from a video
-    // sourceType : 'video',
-    // sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/videos/headtracking.mp4',
-  })
+      // // to read from an image
+      // sourceType : 'image',
+      // sourceUrl : THREEx.ArToolkitContext.baseURL + './hiro_sample.png',
+
+      // to read from a video
+      // sourceType : 'video',
+      // sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/videos/headtracking.mp4',
+    // }
+  )
 
   arToolkitSource.init(function onReady(){
     setTimeout(() => {
