@@ -2,15 +2,12 @@
     "spriteSheet": "overworld",
     "musicSheet": "silent",
     "patternSheet": "overworld-pattern",
-    "checkpoints": [
-        [40, 192]
-    ],
 
     "layers": [
         {
             "tiles": [
                 {
-                    "style": "sky",
+                    "name": "sky",
                     "ranges": [
                         [
                             0, 212,
@@ -19,8 +16,8 @@
                     ]
                 },
                 {
-                    "style": "ground",
-                    "behavior": "ground",
+                    "name": "ground",
+                    "type": "ground",
                     "ranges": [
                         [
                             0, 212,

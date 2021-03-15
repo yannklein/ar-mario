@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { startMario } from '../mario/js/main';
+import { startMario } from '../mario/main';
 
 const createGamePlane = scene => {
 
