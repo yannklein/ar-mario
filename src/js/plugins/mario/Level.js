@@ -40,7 +40,7 @@ export default class Level extends Scene {
 
     update(gameContext) {
         // remove all tiles before drawing new ones
-        gameContext.videoContext.clearRect(0,0,255,255);
+        gameContext.videoContext.clearRect(0,0,256,256);
 
         this.entities.forEach(entity => {
             entity.update(gameContext, this);

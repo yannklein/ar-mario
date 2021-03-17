@@ -36,11 +36,13 @@ async function main(videoContext) {
     inputRouter.addReceiver(mario);
 
     async function runLevel(name) {
-        const loadScreen = new Scene();
+
+        // Disable loadling screen
+        // const loadScreen = new Scene();
         // loadScreen.comp.layers.push(createColorLayer('#000'));
-        loadScreen.comp.layers.push(createTextLayer(font, `Loading ${name}...`));
-        sceneRunner.addScene(loadScreen);
-        sceneRunner.runNext();
+        // loadScreen.comp.layers.push(createTextLayer(font, `Loading ${name}...`));
+        // sceneRunner.addScene(loadScreen);
+        // sceneRunner.runNext();
 
         const level = await loadLevel(name);
 
@@ -53,8 +55,8 @@ async function main(videoContext) {
             }
         });
 
-        const playerProgressLayer = createPlayerProgressLayer(font, level);
-        const dashboardLayer = createDashboardLayer(font, level);
+        // const playerProgressLayer = createPlayerProgressLayer(font, level);
+        // const dashboardLayer = createDashboardLayer(font, level);
 
         mario.pos.set(0, 0);
         level.entities.add(mario);
@@ -62,16 +64,17 @@ async function main(videoContext) {
         const playerEnv = createPlayerEnv(mario);
         level.entities.add(playerEnv);
 
-        const waitScreen = new TimedScene();
-        waitScreen.countDown = 2;
-        // waitScreen.comp.layers.push(createColorLayer('#000'));
-        waitScreen.comp.layers.push(dashboardLayer);
-        waitScreen.comp.layers.push(playerProgressLayer);
-        sceneRunner.addScene(waitScreen);
+        // Disable start screen
+        // const waitScreen = new TimedScene();
+        // waitScreen.countDown = 2;
+        // // waitScreen.comp.layers.push(createColorLayer('#000'));
+        // waitScreen.comp.layers.push(dashboardLayer);
+        // waitScreen.comp.layers.push(playerProgressLayer);
+        // sceneRunner.addScene(waitScreen);
 
         // Don't display collision bounding boxes
         // level.comp.layers.push(createCollisionLayer(level));
-        level.comp.layers.push(dashboardLayer);
+        // level.comp.layers.push(dashboardLayer);
         sceneRunner.addScene(level);
 
         sceneRunner.runNext();
