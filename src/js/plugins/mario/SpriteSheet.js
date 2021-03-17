@@ -47,16 +47,7 @@ export default class SpriteSheet {
 
     draw(name, context, x, y, flip = false) {
         const buffer = this.tiles.get(name)[flip ? 1 : 0];
-        if (Date.now() % 100 === 0) {
-          console.log(name,x,y,this.width, this.height);
-        }
-        // context.fillStyle = 'rgba(255,0,0,0.01)';
-        // context.fillRect(x,y,16,16);
-        // if (x === 0 || y === 0) {
-        //   context.clearRect(0,0,255,255);
-        // } else {
-          context.drawImage(buffer, x, y);
-        // }
+        context.drawImage(buffer, x, y);
     }
 
     drawAnim(name, context, x, y, distance) {
