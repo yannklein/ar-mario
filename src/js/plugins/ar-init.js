@@ -3,6 +3,7 @@ import THREEx from 'ar';
 
 import createTorusKnot from './three/three-torusKnot';
 import createGamePlane from './three/three-gamePlane';
+import createPlane from './three/three-plane';
 
 THREEx.ArToolkitContext.baseURL = 'assets/';
 
@@ -136,6 +137,9 @@ const initAr = (mode = 'production') => {
 
   // add a game plane
   createGamePlane(scene);
+
+  // add a textured plane for the ground
+  createPlane(scene, './assets/wood.jpg');
 
   //////////////////////////////////////////////////////////////////////////////////
   //    render the `whole thing on the page

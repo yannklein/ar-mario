@@ -16,6 +16,7 @@ const createGamePlane = scene => {
 
   var geometry  = new THREE.PlaneGeometry(1,1);
   var material  = new THREE.MeshBasicMaterial({
+    transparent : true,
     map: texture,
     side: THREE.DoubleSide
   });
@@ -28,8 +29,10 @@ const createGamePlane = scene => {
     if (window.ctx) {
       const updatedTexture = new THREE.CanvasTexture(window.ctx.canvas);
       var material  = new THREE.MeshBasicMaterial({
+        transparent : true,
         map: updatedTexture,
-        side: THREE.DoubleSide
+        side: THREE.DoubleSide,
+
       });
       mesh.material = material;
     }

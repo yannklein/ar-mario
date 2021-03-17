@@ -37,7 +37,7 @@ async function main(videoContext) {
 
     async function runLevel(name) {
         const loadScreen = new Scene();
-        loadScreen.comp.layers.push(createColorLayer('#000'));
+        // loadScreen.comp.layers.push(createColorLayer('#000'));
         loadScreen.comp.layers.push(createTextLayer(font, `Loading ${name}...`));
         sceneRunner.addScene(loadScreen);
         sceneRunner.runNext();
@@ -64,12 +64,13 @@ async function main(videoContext) {
 
         const waitScreen = new TimedScene();
         waitScreen.countDown = 2;
-        waitScreen.comp.layers.push(createColorLayer('#000'));
+        // waitScreen.comp.layers.push(createColorLayer('#000'));
         waitScreen.comp.layers.push(dashboardLayer);
         waitScreen.comp.layers.push(playerProgressLayer);
         sceneRunner.addScene(waitScreen);
 
-        level.comp.layers.push(createCollisionLayer(level));
+        // Don't display collision bounding boxes
+        // level.comp.layers.push(createCollisionLayer(level));
         level.comp.layers.push(dashboardLayer);
         sceneRunner.addScene(level);
 
