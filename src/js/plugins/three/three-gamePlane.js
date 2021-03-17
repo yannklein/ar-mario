@@ -14,7 +14,7 @@ const createGamePlane = scene => {
   startMario(window.ctx);
   const texture = new THREE.CanvasTexture(window.ctx.canvas);
 
-  var geometry  = new THREE.PlaneGeometry(1,1);
+  var geometry  = new THREE.PlaneGeometry(2,2);
   var material  = new THREE.MeshBasicMaterial({
     transparent : true,
     map: texture,
